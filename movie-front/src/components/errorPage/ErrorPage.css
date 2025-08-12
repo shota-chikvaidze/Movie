@@ -1,0 +1,43 @@
+.error_section {
+    width: 100%;
+    height: calc( 100vh - 90px );
+}
+
+.error_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    color: #fff;
+    gap: 15px;
+}
+
+.error_container h1 {
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.error_container P {
+    font-size: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.navigate_home_error {
+    padding: 15px 100px;
+    background-color: #df4940;
+    border-radius: 20px;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.navigate_home_error:hover {
+    background-color: #c23f38;
+    transform: scale(1.05);
+}

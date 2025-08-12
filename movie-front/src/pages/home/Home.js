@@ -1,0 +1,87 @@
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+import NewAddedMovies from '../../components/newAddedMovies/NewAddedMovies'
+import './Home.css'
+
+export const Home = () => {
+
+  const [movies, setMovies] = useState([])
+  const [newMovie, setNewMovies] = useState([])
+  const [slider, setSlider] = useState(0)
+
+  const moviesPerView = 1
+  const totalMovies = movies.length
+  const maxIndex = Math.max(0, Math.ceil(totalMovies / moviesPerView) - 1)
+
+  const prev = () => {
+    if(slider > 0){
+      setSlider(slider - 1)
+    }
+  }
+
+  const next = () => {
+    if(slider < maxIndex){
+      setSlider(slider + 1)
+    }
+  }
+
+  const fetchFeaturedMovies = async () => {
+    try{
+
+      const res = await axios.get(`http://localhost:5000/api/movies/featured-movies`)
+      setMovies(res.data.movies)
+
+    }catch(err){
+      console.error("error", err)
+    }
+  }
+
+  useEffect(() => {
+    fetchFeaturedMovies()
+  }, [])
+
+
+  return (
+    <>
+      <section className='slider_section'>
+        <div className='slider_wrapper'>
+          <button onClick={prev} className='nav_btn' disabled={slider === 0}>Prev</button>
+
+          <div className='slider_container'>
+            <div className='slider_track' style={{ transform: `translateX(-${slider * 100}%)` }} >
+              {movies.map((movie, index) => (
+                <div className='slider_movie_item' key={movie._id}>
+                  <div className='slider_movie_item slider_image'>
+                    <img src={movie?.image?.url} alt={movie?.title} />
+                  </div>
+                  <div>
+                    <Link to={`/movies/${movie._id}`}>
+                      <button className='slider_watch_movie_btn'> Watch a Movie </button>
+                    </Link>
+                    <div className='slider_movie_context'>
+                      <h3 className='slider_movie_title'> {movie.title} </h3>
+                      <div className='slider_movie_genre'>
+                        <p> {movie.genre} </p>
+                        <p>
+                          <span>{movie?.rating?.[0]?.source}</span>
+                          {movie?.rating?.[0]?.score || '-'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button onClick={next} className='nav_btn' disabled={slider === maxIndex}>Next</button>
+        </div>
+      </section>
+
+      
+      <NewAddedMovies />
+
+    </>
+  )
+} 

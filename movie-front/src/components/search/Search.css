@@ -1,0 +1,44 @@
+.search_sectiion {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.search_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.search_results {
+    color: #fff;
+    padding-bottom: 20px;
+}
+
+.search_results span {
+    color: #8d9094;
+    font-family: "Oswald", sans-serif;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.no_movies_h4 {
+    font-size: 20px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.no_movies_p {
+    color: #8d9094;
+    font-size: 14px;
+}
+
+.no_movies_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

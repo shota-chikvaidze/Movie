@@ -1,0 +1,44 @@
+.rating_right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.star_icon_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rating_number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #db4c3e;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.rating_users {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.user_icon {
+    font-size: 23px;
+}
+
+.star_icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: grey;
+    transition: color 0.2s;
+}
+
+.star_icon.active {
+    color: gold;
+}
