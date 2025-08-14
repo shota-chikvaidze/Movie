@@ -6,6 +6,6 @@ const episodeSchema = mongoose.Schema({
     videoPath: { type: String,  required: true },
     series: { type: mongoose.Schema.Types.ObjectId,  ref: 'Series',  required: true },
     createdAt: { type: Date,  default: Date.now },
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Episode', episodeSchema)

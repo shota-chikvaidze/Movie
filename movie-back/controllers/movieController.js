@@ -1,5 +1,6 @@
 const express = require('express')
 const Movie = require('../models/movieModel')
+const Series = require('../models/seriesModel')
 
 
 exports.getAllMovies = async (req, res) => {
@@ -118,8 +119,20 @@ exports.createMovies = async (req, res) => {
 exports.getFeaturedMovies = async (req, res) => {
     try{
 
-        const movies = await Movie.find({ isFeatured: 'true', 'type': 'Movie' }).sort({ createdAt: -1 }).limit(5)
-        res.status(200).json({movies});
+        const featuredMovies = await Movie.find({ isFeatured: 'true', 'type': 'Movie' })
+            .sort({ createdAt: -1 })
+            .limit(5) 
+
+        const featuredSeries = await Series.find({ isFeatured: true, type: 'TV Series' })
+            .sort({ createdAt: -1 })
+            .limit(5)
+
+        
+        const allFeatured = [...featuredMovies, ...featuredSeries]
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
+
+            
+        res.status(200).json({ content: allFeatured})
 
     }catch(err){
         res.status(500).json({ message: 'Error fetching homepage movies' });

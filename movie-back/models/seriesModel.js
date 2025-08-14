@@ -8,6 +8,8 @@ const seriesSchema = mongoose.Schema({
     year: { type: Number, required: true },
     director: { type: String, required: true },
     genre: { type: String, required: true },
+    type: { type: String, required: true },
+    isFeatured: { type: Boolean, required: true },
     starring: [
         {
             actor: { type: String, required: true },
@@ -21,6 +23,6 @@ const seriesSchema = mongoose.Schema({
             date: { type: Date, required: true },
         }
     ]
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('Series', seriesSchema)

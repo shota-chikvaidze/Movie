@@ -4,7 +4,15 @@ const Series = require('../models/seriesModel')
 exports.getAllSeries = async (req, res) => {
     try{
 
-        const getAllSeries = await Series.find()
+        const search = req.query.search || ''
+
+        const filter = {}
+
+        if(search){
+            filter.title = { $regex: search, $options: 'i' }
+        }
+
+        const getAllSeries = await Series.find(filter)
         res.status(200).json({message: 'series received successfuly', series: getAllSeries})
 
     }catch(err){
@@ -26,48 +34,29 @@ exports.getSeriesId = async (req, res) => {
     }
 }
 
-exports.newSeries = async (req, res) => {
-    const { title, description, image, year, director, genre, starring: [ {actor, role} ], rating: [ {source, score, date} ] } = req.body
-    
-
-    try{
-
-        if (
-            !title ||
-            !description ||
-            !image ||
-            !director ||
-            !year ||
-            !genre ||
-            !Array.isArray(starring) || starring.length === 0 ||
-            !starring[0].actor ||
-            !starring[0].role ||
-            !Array.isArray(rating) || rating.length === 0 ||
-            !rating[0].source ||
-            !rating[0].score ||
-            !rating[0].date
-        ) {
-            return res.status(400).json({ message: 'All fields required' });
+exports.createSeries = async (req, res) => {
+    try {
+        if (!Array.isArray(req.body) || req.body.length === 0) {
+            return res.status(400).json({ message: 'Array of series required' });
         }
 
-        const newSeries = new Series({
-            title,
-            description,
-            image,
-            year,
-            director,
-            genre,
-            starring: [ { actor, role } ],
-            rating: [ { source, score, date } ]
-        })
-        await newSeries.save()
+        const newSeriesList = await Series.insertMany(req.body);
+        res.status(201).json({ message: 'Series created successfully', series: newSeriesList });
 
-        res.status(201).json({message: 'successfuly created series', series: newSeries})
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Error creating series', error: err.message });
+    }
+};
 
 
+exports.getNewReleasedSeries = async (req, res) => {
+    try{
+
+        const newRealesedSeries = await Series.find({ type: 'TV Series' }).sort({ createdAt: -1 }).limit(18)
+        res.status(200).json({newRealesedSeries}) 
 
     }catch(err){
-        res.status(500).json({message: 'error creating series'})
+        res.status(500).json({message: 'error fetching new relesed series', error: err.message})
     }
-
 }

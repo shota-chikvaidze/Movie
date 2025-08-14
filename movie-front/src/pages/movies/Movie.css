@@ -91,6 +91,11 @@
     transition: all 0.3s ease-in-out;
 }
 
+.pagination_controls button:disabled {
+    cursor: not-allowed;
+    background-color: #777778;
+}
+
 .pagination_controls button:hover {
     background-color: #df4940;
 }

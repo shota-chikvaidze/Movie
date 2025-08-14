@@ -3,13 +3,15 @@ import './NewAddedMovies.css'
 import axios from 'axios'
 import { LiaArrowRightSolid, LiaArrowLeftSolid } from "react-icons/lia";
 import { Link } from 'react-router-dom'
+import { RiMovie2Line } from "react-icons/ri";
+
 
 const NewAddedMovies = () => {
 
     const [slider, setSlider] = useState(0)
     const [newMovies, setNewMovies] = useState([])
 
-    const moviesPerPage = 6
+    const moviesPerPage = 7
     const totalMovies = newMovies.length
     const maxPage = Math.max(0, Math.ceil(totalMovies / moviesPerPage) - 1)
 
@@ -42,32 +44,37 @@ const NewAddedMovies = () => {
 
   return (
     <section className='slider_2_section'>
-        <div className="slider-container">
-        <h1>New Added Movies</h1>
-            <button onClick={prev} disabled={slider === 0} className="slider-btn slider-btn-left"> <LiaArrowLeftSolid /> </button>
+        <div className="slider_2_container">
+          <div className='slider_title_wrapper'>
+            <span>
+              <RiMovie2Line />
+            </span>
+            <h1>New Added Movies</h1>
+          </div>
+          <button onClick={prev} disabled={slider === 0} className="slider_btn slider_btn_left"> <LiaArrowLeftSolid /> </button>
 
-            <div className="movies-wrapper">
-                <div className='movies-track' style={{ transform: `translateX(-${slider * 100}%)` }}>
-                    { newMovies.map((newMovie, index) => (
-                      <Link to={`/movies/${newMovie._id}`} >
-                        <div key={index} className='movie_card'>
-                                        
-                          <div className='movie_card_details'>
-                            <img src={newMovie.image.url} alt={newMovie.title} className='movie_img_rating_image'/>
-                            <div className='movie_context'>
-                              <p> {newMovie.year} </p>
-                              <p> {newMovie.rating[0]?.source}: {newMovie.rating[0]?.score} </p>
-                            </div>
+          <div className="slider_2_movies_wrapper">
+              <div className='slider_2_movies_track' style={{ transform: `translateX(-${slider * 100}%)` }}>
+                  { newMovies.map((newMovie, index) => (
+                    <Link to={`/movies/${newMovie._id}`} >
+                      <div key={index} className='slider_2_movie_card'>
+                                      
+                        <div className='slider_2_movie_card_details'>
+                          <img src={newMovie.image.url} alt={newMovie.title} className='movie_img_rating_image'/>
+                          <div className='slider_2_movie_context'>
+                            <p> {newMovie.year} </p>
+                            <p> {newMovie.rating[0]?.source}: {newMovie.rating[0]?.score} </p>
                           </div>
-                          <p className='movieTitle'> {newMovie.title} </p>
-                                        
                         </div>
-                      </Link>
-                    )) }
-                </div>
-            </div>
-
-            <button onClick={next} disabled={slider === maxPage} className="slider-btn slider-btn-right"> <LiaArrowRightSolid /> </button>
+                        <p className='slider_2_movieTitle'> {newMovie.title} </p>
+                                      
+                      </div>
+                    </Link>
+                  )) }
+              </div>
+          </div>
+          
+          <button onClick={next} disabled={slider === maxPage} className="slider_btn slider_btn_right"> <LiaArrowRightSolid /> </button>
         </div>
     </section>
   )

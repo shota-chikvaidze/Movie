@@ -10,18 +10,21 @@ const Search = () => {
 
   const query = new URLSearchParams(location.search).get('search') || '';
 
-    const handleSearch = async () => {
-
-        try{
-
-            const res = await axios.get(`http://localhost:5000/api/movies/movies?search=${query}`)
-            setMovies(res.data.movies)
-
-        }catch(err){
-            console.error('error', err)
-        }
-
-    }
+  const handleSearch = async () => {
+      try {
+          const [moviesRes, seriesRes] = await Promise.all([
+              axios.get(`http://localhost:5000/api/movies/movies?search=${query}`),
+              axios.get(`http://localhost:5000/api/series/all-series?search=${query}`)
+          ]);
+        
+          const movies = moviesRes.data.movies.map(movie => ({ ...movie, type: 'Movie' }))
+          const series = seriesRes.data.series.map(serie => ({ ...serie, type: 'Series' }))
+        
+          setMovies([...movies, ...series])
+      } catch (err) {
+          console.error('error', err)
+      }
+  }
 
     useEffect(() => {
         handleSearch()
@@ -36,7 +39,7 @@ const Search = () => {
                 {movies.length > 0 ? (
                     <>
                         {movies.map((movie, index) => (
-                            <Link to={`/movies/${movie._id}`} >
+                            <Link to={movie.type === 'Movie' ? `/movies/${movie._id}` : `/series/${movie._id}`} key={index}> 
                               <div key={index} className='movie_card'>
 
                                 <div className='movie_card_details'>
@@ -46,7 +49,9 @@ const Search = () => {
                                     <p> {movie.rating[0]?.source}: {movie.rating[0]?.score} </p>
                                   </div>
                                 </div>
-                                <p className='movieTitle'> {movie.title} </p>
+                                <p className='movieTitle'>
+                                  {movie.title} {movie.type && `(${movie.type})`}
+                                </p>
 
                               </div>
                             </Link>

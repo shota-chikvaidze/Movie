@@ -6,7 +6,7 @@ const ratingSchema = mongoose.Schema({
     movieId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Movie' },
     rating: { type: Number,  min: 1, max: 5, required: true },
     postedAt: { type: Date, default: Date.now, required: true },
-})
+}, { timestamps: true })
 
 ratingSchema.index({ userId: 1, movieId: 1 }, { unique: true })
 ratingSchema.index({ movieId: 1 })

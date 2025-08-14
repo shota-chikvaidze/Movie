@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import NewAddedMovies from '../../components/newAddedMovies/NewAddedMovies'
+import NewAddedSeries from '../../components/newAddedSeries/NewAddedSeries'
 import './Home.css'
 
 export const Home = () => {
@@ -30,7 +31,7 @@ export const Home = () => {
     try{
 
       const res = await axios.get(`http://localhost:5000/api/movies/featured-movies`)
-      setMovies(res.data.movies)
+      setMovies(res.data.content)
 
     }catch(err){
       console.error("error", err)
@@ -81,6 +82,8 @@ export const Home = () => {
 
       
       <NewAddedMovies />
+
+      <NewAddedSeries />
 
     </>
   )
