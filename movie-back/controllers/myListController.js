@@ -44,3 +44,14 @@ exports.getMyList = async (req, res) => {
         res.status(500).json({message: 'error getting list', error: err.message})
     }
 }
+
+exports.deleteList = async (req, res) => {
+    try{
+        
+        const deleteMovie = await Movie.findByIdAndDelete(req.params.id)
+        res.status(200).json({message: 'movie deleted sucessfuly', deleteMovie})
+
+    }catch(err){
+        res.status(500).json({message: 'error deleting movie'})
+    }
+}

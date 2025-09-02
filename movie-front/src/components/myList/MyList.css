@@ -6,6 +6,7 @@
 .myList_item {
     height: 340px;
     width: 230px;
+    position: relative;
 }
 
 .myList_item img {
@@ -29,4 +30,47 @@
     flex-wrap: wrap;
     padding: 40px;
     gap: 30px;
+}
+
+
+.myList_skeleton {
+    background: linear-gradient(90deg,#2a2a2a 25%,#3a3a3a 37%,#2a2a2a 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: 5px;
+}
+
+.row_skeleton {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 40px;
+}
+
+.row_skeleton::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+.movie_del {
+    position: absolute;
+    top: 5px;
+    right: 5px; 
+    font-size: 23px;
+    cursor: pointer;
+    color: #fff;
+}
+
+.movie_del:hover {
+    color: red;
+    box-shadow: 0 10px 25px rgba(255,255,255,0.15) !important;
 }

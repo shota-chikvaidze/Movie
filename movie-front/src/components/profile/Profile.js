@@ -12,10 +12,12 @@ const Profile = () => {
     const [myList, setMyList] = useState([])
     const [userComment, setUserComment] = useState([])
     const [userRating, setUserRating] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const fetchUser = async () => {
         try{
 
+            setLoading(true)
             const token = localStorage.getItem('token')
             const res = await axios.get('http://localhost:5000/api/user/getUser', {
                 headers: {
@@ -24,6 +26,7 @@ const Profile = () => {
             })
             setGetUser(res.data.getUser)
             setMyList(res.data.getUser.myList)
+            setLoading(false)
 
         }catch(err){
             console.error('error', err)
@@ -100,40 +103,67 @@ const Profile = () => {
                     <div className='profile_data_image_wrapper'>
                         <img src={userAvatar} alt='user avatar' />
                     </div>
-                    <div className='user_name_date'>
-                        <h1> {getUser.name} {getUser.lastname} </h1>
-                        <p> <MdOutlineDateRange /> Joined: {new Date(getUser.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
-                    </div>
+                    { loading ? (
+                        <>
+                            {Array.from({ length: 1 }).map((_, index) => (
+                                <div key={index} className='user_name_date skeleton_profile_card'>
+                                    <div className="skeleton skeleton-name"></div>
+                                    <div className="skeleton skeleton-date"></div>
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            <div className='user_name_date'>
+                                <h1> {getUser.name} {getUser.lastname} </h1>
+                                <p> <MdOutlineDateRange /> Joined: {new Date(getUser.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
+                            </div>
+                        </>
+                    ) }
                 </div>
 
                 <div className='profile_data_right'>
-                    <Link to={'/movie-list'}>
-                        <div className={myList.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
-                            <p>Movie List</p>
-                            <h3>{myList.length}</h3>
-                        </div>
-                    </Link>
 
-                    <Link to={'/user-comments'}>
-                        <div className={userComment.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
-                            <p>Comments</p>
-                            <h3>{userComment.length}</h3>
-                        </div>
-                    </Link>
-
-                    <Link to={'/user-ratings'}>
-                        <div className={userRating.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
-                            <p>Ratings</p>
-                            <h3>{userRating.length}</h3>
-                        </div>
-                    </Link>
-
-                    <Link to={'/myList'}>
-                        <div className={myList.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
-                            {/* <p>Movie List</p>
-                            <h3>{myList.length}</h3> */}
-                        </div>
-                    </Link>
+                    { loading ? (
+                        <>
+                            {Array.from({ length: 4 }).map((_, index) => (
+                               <div key={index} className='profile_my_list skeleton_card'>
+                                    <div className="skeleton_text short"></div> 
+                                    <div className="skeleton_text"></div>
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <>
+                            <Link to={'/movie-list'}>
+                                <div className={myList.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
+                                    <p>Movie List</p>
+                                    <h3>{myList.length}</h3>
+                                </div>
+                            </Link>
+                            
+                            <Link to={'/user-comments'}>
+                                <div className={userComment.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
+                                    <p>Comments</p>
+                                    <h3>{userComment.length}</h3>
+                                </div>
+                            </Link>
+                            
+                            <Link to={'/user-ratings'}>
+                                <div className={userRating.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
+                                    <p>Ratings</p>
+                                    <h3>{userRating.length}</h3>
+                                </div>
+                            </Link>
+                            
+                            <Link to={'/myList'}>
+                                <div className={myList.length === 0 ? 'profile_my_list list_gray' : 'profile_my_list list_white'} >
+                                    {/* <p>Movie List</p>
+                                    <h3>{myList.length}</h3> */}
+                                </div>
+                            </Link>
+                        </>
+                    ) }
 
                 </div>
 

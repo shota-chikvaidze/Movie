@@ -10,6 +10,7 @@ const NewAddedMovies = () => {
 
     const [slider, setSlider] = useState(0)
     const [newMovies, setNewMovies] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const moviesPerPage = 7
     const totalMovies = newMovies.length
@@ -30,8 +31,11 @@ const NewAddedMovies = () => {
     const fetchNewAddedMovies = async () => {
         try{
 
+            setLoading(true)
             const res = await axios.get('http://localhost:5000/api/movies/new-added-movies')
+
             setNewMovies(res.data.newRealesed)
+            setLoading(false)
 
         }catch(err){
             console.error('error', err)
@@ -55,22 +59,33 @@ const NewAddedMovies = () => {
 
           <div className="slider_2_movies_wrapper">
               <div className='slider_2_movies_track' style={{ transform: `translateX(-${slider * 100}%)` }}>
-                  { newMovies.map((newMovie, index) => (
-                    <Link to={`/movies/${newMovie._id}`} >
-                      <div key={index} className='slider_2_movie_card'>
-                                      
-                        <div className='slider_2_movie_card_details'>
-                          <img src={newMovie.image.url} alt={newMovie.title} className='movie_img_rating_image'/>
-                          <div className='slider_2_movie_context'>
-                            <p> {newMovie.year} </p>
-                            <p> {newMovie.rating[0]?.source}: {newMovie.rating[0]?.score} </p>
+                { loading ? (
+                  <>
+                    {Array.from({ length: 7 }).map((_, index) => (
+                      <div key={index} className='slider_2_movie_card skeleton_card'></div>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    { newMovies.map((newMovie, index) => (
+                      <Link to={`/movies/${newMovie._id}`} >
+                        <div key={index} className='slider_2_movie_card'>
+
+                          <div className='slider_2_movie_card_details'>
+                            <img src={newMovie.image.url} alt={newMovie.title} className='movie_img_rating_image'/>
+                            <div className='slider_2_movie_context'>
+                              <p> {newMovie.year} </p>
+                              <p> {newMovie.rating[0]?.source}: {newMovie.rating[0]?.score} </p>
+                            </div>
                           </div>
+                          <p className='slider_2_movieTitle'> {newMovie.title} </p>
+
                         </div>
-                        <p className='slider_2_movieTitle'> {newMovie.title} </p>
-                                      
-                      </div>
-                    </Link>
-                  )) }
+                      </Link>
+                    )) }
+                  </>
+                ) }
+
               </div>
           </div>
           

@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.put('/', protect, myListController.movieList)
 router.get('/', protect, myListController.getMyList)
+router.delete('/delete-movie/:id', protect, myListController.deleteList)
 
 module.exports = router

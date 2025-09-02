@@ -1,12 +1,13 @@
 .all_comments_item {
     background-color: #f9f9fb;      
-    border: 1px solid #dddfe4; 
     border-radius: 12px;
     transition: box-shadow 0.3s ease, transform 0.2s ease;
     max-width: 650px;
+    min-height: 110px;
     margin: 30px auto;
     padding: 25px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+    position: relative;
 }
 
 .all_comments_item:hover {
@@ -32,4 +33,16 @@
     color: #fff;
     font-weight: 500;
     font-size: 1.7rem;
+}
+
+.del_icon {
+    position: absolute;
+    top: 20px;
+    right: 20px; 
+    font-size: 23px;
+    cursor: pointer;
+}
+
+.del_icon:hover {
+    color: red;
 }

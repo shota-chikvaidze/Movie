@@ -75,3 +75,40 @@
 .list_white {
     color: #fff;
 }
+
+
+
+
+
+.skeleton {
+    background: linear-gradient(90deg, #2a2b31 25%, #3a3b41 50%, #2a2b31 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 6px;
+}
+
+.skeleton_profile_card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 10px 0;
+}
+
+.skeleton-name {
+    width: 200px;
+    height: 24px;
+}
+
+.skeleton-date {
+  width: 150px;
+  height: 16px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

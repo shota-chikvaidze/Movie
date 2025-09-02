@@ -13,6 +13,7 @@ import ErrorPage from './components/errorPage/ErrorPage'
 import Profile from './components/profile/Profile'
 import UserComments from './components/userComments/UserComments'
 import ProfileRating from './components/profileRating/ProfileRating'
+import ActorDetails from './components/actorDetails/ActorDetails'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path='/movies/:id' element={ <MovieDetails /> } />
         <Route path='/search' element={ <Search /> } />
         <Route path='/actors' element={ <Actors /> } />
+        <Route path='/actors/:id' element={ <ActorDetails /> } />
         <Route path='/movie-list' element={ <MyList /> } />
         <Route path='*' element={ <ErrorPage /> } />
         <Route path='/myProfile' element={ <Profile /> } />

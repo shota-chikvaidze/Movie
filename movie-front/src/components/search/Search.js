@@ -6,12 +6,15 @@ import './Search.css'
 const Search = () => {
 
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true)
   const location = useLocation();
 
   const query = new URLSearchParams(location.search).get('search') || '';
 
   const handleSearch = async () => {
       try {
+
+          setLoading(true)
           const [moviesRes, seriesRes] = await Promise.all([
               axios.get(`http://localhost:5000/api/movies/movies?search=${query}`),
               axios.get(`http://localhost:5000/api/series/all-series?search=${query}`)
@@ -21,6 +24,8 @@ const Search = () => {
           const series = seriesRes.data.series.map(serie => ({ ...serie, type: 'Series' }))
         
           setMovies([...movies, ...series])
+          setLoading(false)
+
       } catch (err) {
           console.error('error', err)
       }
@@ -33,10 +38,17 @@ const Search = () => {
   return (
     <>
         <section className='search_sectiion'>
-
             <h3 className='search_results'> Search results for: <span>{query}</span> </h3>
             <div className='search_container'>
-                {movies.length > 0 ? (
+              
+              { loading ? (
+                <>
+                  {Array.from({ length: 20 }).map((_, index) => (
+                    <div key={index} className='movie_card skeleton_card'></div>
+                  ))}
+                </>
+              ) : (
+                movies.length > 0 ? (
                     <>
                         {movies.map((movie, index) => (
                             <Link to={movie.type === 'Movie' ? `/movies/${movie._id}` : `/series/${movie._id}`} key={index}> 
@@ -65,9 +77,11 @@ const Search = () => {
                         <p className='no_movies_p'>Try searching for another movie or show.</p>
                       </div>
                     </>
-                )}
-            </div>
+                )
 
+              ) }
+
+            </div>
         </section>
     </>
   )

@@ -25,7 +25,6 @@ exports.getActors = async (req, res) => {
 
 }
 
-
 exports.postActors = async (req, res) => {
     try {
         if (!Array.isArray(req.body) || req.body.length === 0) {
@@ -37,5 +36,19 @@ exports.postActors = async (req, res) => {
 
     } catch (err) {
         res.status(500).json({ message: 'Error creating actors', error: err.message });
+    }
+}
+
+exports.getActorsDetails = async (req, res) => {
+    try{
+
+        const getActorsDetail = await Actor.findById(req.params.id)
+        if(!getActorsDetail){
+            return res.status(404).json({message: 'actor details not found'})
+        }
+        res.status(200).json({getActorsDetail})
+        
+    }catch(err){
+        res.status(500).json({message: 'error getting actors details'})
     }
 }

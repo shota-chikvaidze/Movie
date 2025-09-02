@@ -9,6 +9,7 @@ const NewAddedSeries = () => {
 
     const [slider, setSlider] = useState(0)
     const [newSeries, setNewSeries] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const seriesPerPage = 7
     const totalSeries = newSeries.length
@@ -29,9 +30,12 @@ const NewAddedSeries = () => {
     const fetchNewAddedSeries = async () => {
         try{
 
+            setLoading(true)
             const res = await axios.get('http://localhost:5000/api/series/new-added-series')
+            
             setNewSeries(res.data.newRealesedSeries)
-
+            setLoading(false)
+            
         }catch(err){
             console.error('error', err)
         }
@@ -54,22 +58,35 @@ const NewAddedSeries = () => {
 
           <div className="slider_3_series_wrapper">
               <div className='series_track' style={{ transform: `translateX(-${slider * 100}%)` }}>
-                  { newSeries.map((newSeries, index) => (
-                    // <Link to={`/movies/${newSeries._id}`} >
-                      <div key={index} className='slider_3_series_card'>
-                                      
-                        <div className='slider_3_series_card_details'>
-                          <img src={newSeries.image.url} alt={newSeries.title} className='movie_img_rating_image'/>
-                          <div className='slider_3_series_context'>
-                            <p> {newSeries.year} </p>
-                            <p> {newSeries.rating[0]?.source}: {newSeries.rating[0]?.score} </p>
+
+                { loading ? (
+                  <>
+                    {Array.from({ length: 7 }).map((_, index) => (
+                      <div key={index} className='slider_3_series_card skeleton_card'></div>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    { newSeries.map((newSeries, index) => (
+                      // <Link to={`/movies/${newSeries._id}`} >
+                        <div key={index} className='slider_3_series_card'>
+
+                          <div className='slider_3_series_card_details'>
+                            <img src={newSeries.image.url} alt={newSeries.title} className='movie_img_rating_image'/>
+                            <div className='slider_3_series_context'>
+                              <p> {newSeries.year} </p>
+                              <p> {newSeries.rating[0]?.source}: {newSeries.rating[0]?.score} </p>
+                            </div>
                           </div>
+                          <p className='slider_3_seriesTitle'> {newSeries.title} </p>
+
                         </div>
-                        <p className='slider_3_seriesTitle'> {newSeries.title} </p>
-                                      
-                      </div>
-                    // </Link>
-                  )) }
+                      // </Link>
+                    )) }
+                  </>
+                ) }
+
+                  
               </div>
           </div>
           

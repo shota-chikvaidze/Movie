@@ -58,3 +58,24 @@ exports.getUserComments = async (req, res) => {
     }
 
 }
+
+exports.deleteComments = async (req, res) => {
+    try{
+
+        const deleteComment = await Comment.findByIdAndDelete(req.params.id)
+        res.status(200).json({message: 'comment deleted successfuly', deleteComment})
+
+    }catch(err){
+        res.status(500).json({message: 'error deleting comment', error: err.message})
+    }
+}
+
+exports.editComment = async (req, res) => {
+    try{
+        
+        
+
+    }catch(err){
+        res.status(500).json({message: 'error editing comment', error: err.message})
+    }
+}
