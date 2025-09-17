@@ -8,7 +8,7 @@ exports.rate = async (req, res) => {
 
 
     if(rating < 1 || rating > 5){
-        return res.status(400).json({message: 'rating must be between this numbers'})
+        return res.status(400).json({message: 'rating must be between these numbers'})
     }
 
     try{
@@ -18,11 +18,11 @@ exports.rate = async (req, res) => {
         if(exists){
             exists.rating = rating
             await exists.save()
-            res.status(200).json({message: 'rating changed sucessfuly', rating: exists})
+            res.status(200).json({message: 'rating changed sucessfully', rating: exists})
         }else{
-            const newRaiting = new Rating({ rating, userId, movieId })
-            await newRaiting.save()
-            res.status(201).json({message: 'rating submited', rating: newRaiting})    
+            const newRating = new Rating({ rating, userId, movieId })
+            await newRating.save()
+            res.status(201).json({message: 'rating submited', rating: newRating})    
         }
 
     }catch(err){
