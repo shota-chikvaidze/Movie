@@ -7,8 +7,11 @@ Movie Database – Manage and interact with movies, including authentication, co
 
 ## Some of the screenshots from my Website
   <img width="1890" height="1039" alt="Screenshot 2025-10-25 165830" src="https://github.com/user-attachments/assets/f9b55011-d64d-43d5-be83-52b92134ba59" />
+  
   <img width="1877" height="1032" alt="image" src="https://github.com/user-attachments/assets/e9e5b1dc-25e2-4b21-9a0e-77d73eeeedae" />
+  
   <img width="1892" height="1037" alt="image" src="https://github.com/user-attachments/assets/e402f40a-8766-46d1-8bf8-ba71dfc40035" />
+  
   <img width="1893" height="1037" alt="image" src="https://github.com/user-attachments/assets/4934c2b8-0682-466f-b361-ff806c66180b" />
 
 
