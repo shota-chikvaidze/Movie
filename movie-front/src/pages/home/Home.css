@@ -1,0 +1,127 @@
+.slider_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.slider_container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider_track {
+    display: flex;
+    transition: all 0.3s ease-in-out;
+}
+
+.slider_movie_item {
+    flex: 0 0 100%;
+    height: 700px;
+    position: relative;
+}
+
+.product_img_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slider_movie_item img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    object-fit: cover;
+}
+
+.slider_image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.nav_btn {
+    padding: 10px 15px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.nav_btn:disabled {
+    background: #777;
+    cursor: not-allowed;
+}
+
+.slider_watch_movie_btn {
+    padding: 12px 40px;
+    color: #fff;
+    font-size: 16px;
+    background-color: #ca4b44;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    z-index: 3;
+}
+
+.slider_movie_context {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    color: #fff;
+    z-index: 3;
+}
+
+.slider_movie_title {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.slider_movie_genre {
+    display: flex;
+    gap: 30px;
+}
+
+.slider_movie_genre:first-child {
+    font-weight: 300;
+}
+
+.slider_movie_genre:last-child span {
+    border: 1px solid #fff;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.skeleton_card {
+    background: linear-gradient(90deg, #2a2b31 25%, #3a3b41 50%, #2a2b31 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 6px;
+}
+
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

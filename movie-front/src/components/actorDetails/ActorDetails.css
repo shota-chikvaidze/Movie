@@ -1,0 +1,107 @@
+.actor_details_container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    color: #eee;
+}
+
+.actor_details_left {
+    flex: 1;
+    text-align: center;
+}
+
+.actor_image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.actor_image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,255,255,0.15);
+}
+
+.actor_name {
+    margin-top: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.actor_basic_info p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+.actor_right {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.actor_bio_sect h2, .actor_movies_sect h2, .actor_awards_sect h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.3rem;
+}
+
+.actor_bio p {
+    line-height: 1.6;
+    color: #ddd;
+}
+
+.movies_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.actor_movies {
+    background-color: #2a2b30;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 400;
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+    cursor: pointer;
+    color: #eee;
+}
+
+.actor_movies:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(255,255,255,0.1);
+    background-color: #3a3b40;
+}
+
+.actor_awards_sect ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.actor_awards_sect li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.loading_text {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 5rem;
+    color: #999;
+}
+
+.actor_reward_icon {
+    color: #df4940;
+    font-size: 20px;
+}

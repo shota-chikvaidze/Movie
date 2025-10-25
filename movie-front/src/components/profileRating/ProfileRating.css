@@ -1,0 +1,58 @@
+.all_ratings_item {
+    background-color: #f9f9fb;      
+    border-radius: 12px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    max-width: 650px;
+    height: 110px;
+    margin: 30px auto;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.all_ratings_item:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    transform: translateY(-4px);
+}
+
+.all_ratings_item p:first-child {
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+    color: #2c3e50; 
+}
+
+.no_ratings_para {
+    margin: 30px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.7rem;
+}
+
+.rating_skeleton {
+    background: linear-gradient(90deg,#2a2a2a 25%,#3a3a3a 37%,#2a2a2a 63%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease infinite;
+    border-radius: 5px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -400px 0;
+    }
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+.rating_del_btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+.rating_del_btn:hover {
+    color: red;
+}

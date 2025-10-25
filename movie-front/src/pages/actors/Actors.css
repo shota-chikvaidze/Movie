@@ -1,0 +1,54 @@
+.actors_section {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 40px;
+}
+
+.actors_container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+}
+
+
+.actor_item {
+    width: 280px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.actor_item_image:hover::after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.actor_item_image {
+    position: relative;
+    width: 100%;
+    height: 80%;
+}
+
+.actor_item_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.actor_item p {
+    color: #fff;
+    font-size: 15px;
+    font-family: "Oswald", sans-serif;
+}
