@@ -49,7 +49,7 @@ export const Movie = () => {
       <section className='movies_section'>
     
         <div className='filter_container'>
-          <div>
+          <div className='genre_filter'>
             <p>Genre</p>
             <select onChange={(e) => setGenre(e.target.value)} value={genre}>
               <option value=''>All</option>
@@ -60,7 +60,7 @@ export const Movie = () => {
             </select>
           </div>
     
-          <div>
+          <div className='year_filter'>
             <p>Year</p>
             <select onChange={(e) => setYear(e.target.value)} value={year}>
               <option value=''>All</option>
@@ -87,7 +87,7 @@ export const Movie = () => {
             </select>
           </div>
     
-          <div>
+          <div className='rating_filter'>
             <p>IMDb</p>
             <select onChange={(e) => setRating(e.target.value)} value={rating}>
               <option value=''>All</option>
