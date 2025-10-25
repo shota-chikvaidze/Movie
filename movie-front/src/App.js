@@ -8,14 +8,27 @@ import { Actors } from './pages/actors/Actors';
 import Layout from './layout/Layout'
 import MovieDetails from './components/movieDetails/MovieDetails';
 import Search from './components/search/Search'
-import MyList from './components/myList/MyList'
 import ErrorPage from './components/errorPage/ErrorPage'
+import ActorDetails from './components/actorDetails/ActorDetails'
+
+
+import MyList from './components/myList/MyList'
 import Profile from './components/profile/Profile'
 import UserComments from './components/userComments/UserComments'
 import ProfileRating from './components/profileRating/ProfileRating'
-import ActorDetails from './components/actorDetails/ActorDetails'
+
+
+import { useAuth } from './components/authProvider/AuthProvider';
+
 
 function App() {
+
+  const { user, loading } = useAuth()
+
+  if(loading){
+    return <p>Loading...</p>
+  }
+
   return (
     <>
       <Layout />
@@ -29,11 +42,16 @@ function App() {
         <Route path='/search' element={ <Search /> } />
         <Route path='/actors' element={ <Actors /> } />
         <Route path='/actors/:id' element={ <ActorDetails /> } />
-        <Route path='/movie-list' element={ <MyList /> } />
         <Route path='*' element={ <ErrorPage /> } />
-        <Route path='/myProfile' element={ <Profile /> } />
-        <Route path='/user-comments' element={ <UserComments /> } />
-        <Route path='/user-ratings' element={ <ProfileRating /> } />
+
+        {user && (
+          <>
+            <Route path='/movie-list' element={ <MyList /> } />
+            <Route path='/myProfile' element={ <Profile /> } />
+            <Route path='/user-comments' element={ <UserComments /> } />
+            <Route path='/user-ratings' element={ <ProfileRating /> } />
+          </>
+        )}
       </Routes>
     </>
   );

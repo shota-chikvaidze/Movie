@@ -73,17 +73,14 @@ exports.login = async (req, res) => {
 exports.getUser = async (req, res) => {
     try{
 
-        const token = req.headers.authorization?.split(' ')[1]
-        if(!token){
-            return res.status(400).json({message: 'no token'})
+        const user = await User.findById(req.user.id).select('-password')
+        if(!user){
+            return res.status(404).json({message: 'user not found'})
         }
 
-        const decoded = jwt.verify(token, 'SECRETTOKEN')
-        const getUser = await User.findById(decoded.id)
+        res.status(200).json({user})
 
-        res.status(200).json({message: 'user received successfuly', getUser})
-
-    }catch{
-        res.status(500).json({message: 'error fetching users'})
+    }catch(err){
+        res.status(500).json({message: 'error getting user'})
     }
 }

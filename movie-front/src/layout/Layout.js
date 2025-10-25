@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import './Layout.css'
-import { isLoggedIn, logOut } from '../auth'
+import { useAuth } from '../components/authProvider/AuthProvider'
 
 import { IoSearchOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
@@ -16,10 +16,10 @@ import { LiaComments } from "react-icons/lia";
 
 const Layout = () => {
   
-  const [loggedIn, setLoggedIn] = useState(isLoggedIn())
   const [search, setSearch] = useState('');
   const [popup, setPopup] = useState(false);
   const navigate = useNavigate()
+  const { user, logoutUser, loading } = useAuth()
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -28,22 +28,6 @@ const Layout = () => {
     }
   };
 
-  useEffect(() => {
-    const checkLogin = () => {
-      setLoggedIn(isLoggedIn());
-    };
-
-    window.addEventListener("storage", checkLogin);
-    return () => {
-      window.removeEventListener("storage", checkLogin);
-    };
-  }, []);
-
-  const handleLogout = () => {
-    logOut();
-    navigate('/')
-    window.location.reload();
-  }
 
   const handlePopup = () => {
     if(popup === true) {
@@ -52,7 +36,6 @@ const Layout = () => {
       setPopup(true)
     )
   }
-
 
 
   return (
@@ -88,7 +71,7 @@ const Layout = () => {
           </div>
         </div>
 
-        {loggedIn ? (
+        {user ? (
           <>
             <div className='logged_in_user'>
               <FaUser className='user_logo' onClick={handlePopup} />
@@ -127,7 +110,7 @@ const Layout = () => {
                       </li>
                     </ul>
 
-                    <button onClick={handleLogout} className='sign_out_btn' >Sign Out</button>
+                    <button onClick={logoutUser} className='sign_out_btn' >Sign Out</button>
                     
                   </div>
                 </>

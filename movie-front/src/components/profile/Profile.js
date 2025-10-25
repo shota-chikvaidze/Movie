@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import './Profile.css'
 import userAvatar from '../../assets/images/user-avatar.png'
 import { MdOutlineDateRange } from "react-icons/md";
@@ -18,14 +18,11 @@ const Profile = () => {
         try{
 
             setLoading(true)
-            const token = localStorage.getItem('token')
-            const res = await axios.get('http://localhost:5000/api/user/getUser', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            setGetUser(res.data.getUser)
-            setMyList(res.data.getUser.myList)
+
+            const res = await axios.get('/user/getUser')
+            
+            setGetUser(res.data.user)
+            setMyList(res.data.user.myList)
             setLoading(false)
 
         }catch(err){
@@ -33,9 +30,6 @@ const Profile = () => {
         }
     }
 
-    useEffect(() => {
-        fetchUser()
-    }, [])
 
     const fetchComments = async () => {
         try{
@@ -64,10 +58,6 @@ const Profile = () => {
         }
     }
 
-    useEffect(() => {
-        fetchComments()
-    }, [])
-
     
     const fetchRating = async () => {
         try{
@@ -90,6 +80,8 @@ const Profile = () => {
 
     useEffect(() => {
         fetchRating()
+        fetchComments()
+        fetchUser()
     }, [])
     
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { Link } from 'react-router-dom'
 import './MyList.css'
 import { TbHttpDelete } from "react-icons/tb";
@@ -13,10 +13,7 @@ const MyList = () => {
     try{
       
       setLoading(true)
-      const token = localStorage.getItem('token')
-      const res = await axios.get('http://localhost:5000/api/myList', {
-        headers: {Authorization: `Bearer ${token}`}
-      })
+      const res = await axios.get('/myList')
 
       setMyList(res.data)
       setLoading(false)
@@ -30,15 +27,10 @@ const MyList = () => {
     handleFetchList()
   }, [])
 
-  const deleteMOvie = async (movieId) => {
+  const deleteMovie = async (movieId) => {
     try{
 
-      const token = localStorage.getItem('token')
-      const res = await axios.delete(`http://localhost:5000/api/myList/delete-movie/${movieId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      const res = await axios.delete(`/myList/delete-movie/${movieId}`)
 
       setMyList((prevMovie) => {
         return prevMovie.filter((del) => del._id !== movieId)
@@ -74,7 +66,7 @@ const MyList = () => {
                       <Link to={`/movies/${myListt._id}`} >
                         <img src={myListt.image.url} alt={myListt.title} />
                       </Link>
-                      <TbHttpDelete onClick={() => deleteMOvie(myListt._id)} className='movie_del' />  
+                      <TbHttpDelete onClick={() => deleteMovie(myListt._id)} className='movie_del' />  
                     </div>
                 ))}
               </div>
