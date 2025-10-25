@@ -29,6 +29,3 @@ Movie Database – Manage and interact with movies, including authentication, co
 - **Get User Activity:** View comments and ratings per movie you added. 
 
 
-
-```markdown
-![Movie Database Screenshot](screenshot.png)
