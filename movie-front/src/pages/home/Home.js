@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { Link } from 'react-router-dom'
 import NewAddedMovies from '../../components/newAddedMovies/NewAddedMovies'
 import NewAddedSeries from '../../components/newAddedSeries/NewAddedSeries'
@@ -8,7 +8,6 @@ import './Home.css'
 export const Home = () => {
 
   const [movies, setMovies] = useState([])
-  const [newMovie, setNewMovies] = useState([])
   const [slider, setSlider] = useState(0)
   const [loading, setLoading] = useState(true)
 
@@ -32,7 +31,7 @@ export const Home = () => {
     try{
 
       setLoading(true)
-      const res = await axios.get(`http://localhost:5000/api/movies/featured-movies`)
+      const res = await axios.get(`/movies/featured-movies`)
       
       setMovies(res.data.content)
       setLoading(false)

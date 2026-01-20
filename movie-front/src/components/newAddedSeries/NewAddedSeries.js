@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './NewAddedSeries.css'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { LiaArrowRightSolid, LiaArrowLeftSolid } from "react-icons/lia";
 import { Link } from 'react-router-dom'
 import { FiTv } from "react-icons/fi";
@@ -31,7 +31,7 @@ const NewAddedSeries = () => {
         try{
 
             setLoading(true)
-            const res = await axios.get('http://localhost:5000/api/series/new-added-series')
+            const res = await axios.get('/series/new-added-series')
             
             setNewSeries(res.data.newRealesedSeries)
             setLoading(false)

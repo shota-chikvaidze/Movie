@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { useParams } from 'react-router-dom'
 import './ActorDetails.css'
 import { FaAward } from "react-icons/fa";
@@ -12,7 +12,7 @@ const ActorDetails = () => {
   const fetchActorDet = async () => {
     try{
 
-      const res = await axios.get(`http://localhost:5000/api/actors/get-actors-details/${id}`)
+      const res = await axios.get(`/actors/get-actors-details/${id}`)
       setActorDetails(res.data.getActorsDetail)
 
     }catch(err){

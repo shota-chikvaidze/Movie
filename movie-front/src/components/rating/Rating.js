@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import './Rating.css'
 import { FaStar } from "react-icons/fa";
 import { AiOutlineUser } from "react-icons/ai";
@@ -16,7 +16,7 @@ const Rating = ({ movieId }) => {
     const fetchRatingSummary = async () => {
         try{
 
-            const res = await axios.get(`http://localhost:5000/api/rating/rating-summary?movieId=${movieId}`)
+            const res = await axios.get(`/rating/rating-summary?movieId=${movieId}`)
             setTotalRating(res.data.totalRating)
             setAverageRating(res.data.averageRating)
 
@@ -37,9 +37,8 @@ const Rating = ({ movieId }) => {
         try {
 
             const res = await axios.post(
-              `http://localhost:5000/api/rating/post-rating/${movieId}`,
+              `/rating/post-rating/${movieId}`,
               { rating: value, movieId },
-              { headers: { Authorization: `Bearer ${token}` } }
             );
 
             setPostRating(value);

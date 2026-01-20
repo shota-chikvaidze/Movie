@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../api/axios'
 import './Search.css'
 
 const Search = () => {
@@ -16,8 +16,8 @@ const Search = () => {
 
           setLoading(true)
           const [moviesRes, seriesRes] = await Promise.all([
-              axios.get(`http://localhost:5000/api/movies/movies?search=${query}`),
-              axios.get(`http://localhost:5000/api/series/all-series?search=${query}`)
+              axios.get(`/movies?search=${query}`),
+              axios.get(`/series/all-series?search=${query}`)
           ]);
         
           const movies = moviesRes.data.movies.map(movie => ({ ...movie, type: 'Movie' }))

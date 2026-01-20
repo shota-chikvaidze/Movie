@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../api/axios'
 import './MovieDetails.css'
 import Rating from '../rating/Rating'
 
@@ -32,7 +32,7 @@ const MovieDetails = () => {
   const fetchMovieById = async () => {
       try{
 
-          const res = await axios.get(`http://localhost:5000/api/movies/movies-by-id/${id}`)
+          const res = await axios.get(`/movies/movies-by-id/${id}`)
           setMovieDetails(res.data.getMoviesById)
           
       }catch(err){
@@ -51,7 +51,7 @@ const MovieDetails = () => {
     try{
       e.preventDefault()
 
-      const res = await axios.post('http://localhost:5000/api/error', errorForm)
+      const res = await axios.post('/error', errorForm)
       
       if(res.status === 200){
         navigate(`/movies/${id}`)
@@ -81,9 +81,8 @@ const MovieDetails = () => {
       const token = localStorage.getItem('token');
 
       const res = await axios.put(
-        'http://localhost:5000/api/myList',
+        '/myList',
         { movieId: id },
-        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       const { action } = res.data
@@ -109,16 +108,10 @@ const MovieDetails = () => {
   const handlePostComments = async () => {
     try{
 
-      const token = localStorage.getItem('token')
-      const res = await axios.post('http://localhost:5000/api/comment/post-comment',
+      const res = await axios.post('/comment/post-comment',
         {
           text: comment.text,
           movieId: comment.movie
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
         }
       )
 
@@ -137,7 +130,7 @@ const MovieDetails = () => {
   const handleGetComments = async () => {
     try{
       
-        const res = await axios.get('http://localhost:5000/api/comment/get-comment', {
+        const res = await axios.get('/comment/get-comment', {
           params: {
             movieId: comment.movie
           }
@@ -215,9 +208,9 @@ const MovieDetails = () => {
                       <p>
                       {Array.isArray(movieDetails.starring) && movieDetails.starring.length >= 3 ? (
                             <>
-                              Actor:{" "}
-                              <span>{movieDetails.starring[0].actor}</span>,{" "}
-                              <span>{movieDetails.starring[1].actor}</span>,{" "}
+                              Actor:
+                              <span>{movieDetails.starring[0].actor}</span>,
+                              <span>{movieDetails.starring[1].actor}</span>,
                               <span>{movieDetails.starring[2].actor}</span>
                             </>
                           ) : (

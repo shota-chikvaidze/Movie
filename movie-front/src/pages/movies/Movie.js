@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../api/axios'
 import './Movie.css'
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
@@ -19,7 +19,7 @@ export const Movie = () => {
     try{
       
       setLoading(true)
-      const res = await axios.get(`http://localhost:5000/api/movies/movies` , {
+      const res = await axios.get(`/movies` , {
         params: {
           page: pageNumber,
           limit: 20,

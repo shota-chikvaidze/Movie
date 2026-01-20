@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { Link } from 'react-router-dom'
 import backgroundMovies from '../../assets/images/movie-background.jpg'
 import './Registration.css'
@@ -25,7 +25,7 @@ export const Registration = () => {
 
     try{
 
-      const res = await axios.post('http://localhost:5000/api/user/register', form)
+      const res = await axios.post('/user/register', form)
 
       if(res.status === 201 && res.data.token){
         localStorage.setItem('token', res.data.token)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './NewAddedMovies.css'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { LiaArrowRightSolid, LiaArrowLeftSolid } from "react-icons/lia";
 import { Link } from 'react-router-dom'
 import { RiMovie2Line } from "react-icons/ri";
@@ -32,7 +32,7 @@ const NewAddedMovies = () => {
         try{
 
             setLoading(true)
-            const res = await axios.get('http://localhost:5000/api/movies/new-added-movies')
+            const res = await axios.get('/movies/new-added-movies')
 
             setNewMovies(res.data.newRealesed)
             setLoading(false)

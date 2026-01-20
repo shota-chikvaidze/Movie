@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import './Series.css'
 
 export const Series = () => {
@@ -12,7 +12,7 @@ export const Series = () => {
     try{
 
       setLoading(true)
-      const res = await axios.get('http://localhost:5000/api/series/all-series')      
+      const res = await axios.get('/series/all-series')      
       
       setSeries(res.data.series)
       setLoading(false)

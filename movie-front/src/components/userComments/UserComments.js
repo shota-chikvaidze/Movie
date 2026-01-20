@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { jwtDecode } from 'jwt-decode'
 import './userComments.css'
 import { TbHttpDelete } from "react-icons/tb";
@@ -20,11 +20,7 @@ const UserComments = () => {
             const decoded = jwtDecode(token)
             const userId = decoded.id
 
-            const res = await axios.get(`http://localhost:5000/api/comment/get-user-comment/${userId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+            const res = await axios.get(`/comment/get-user-comment/${userId}`)
 
             setAllComments(res.data.userComments)
             setLoading(false)
@@ -44,11 +40,7 @@ const UserComments = () => {
         const token = localStorage.getItem('token')
         if(!token) return
 
-        const res = await axios.delete(`http://localhost:5000/api/comment/delete-comment/${commentId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
+        const res = await axios.delete(`/comment/delete-comment/${commentId}`)
         setAllComments((prevComment) => {
           return prevComment.filter((del) => del._id !== commentId)
         })

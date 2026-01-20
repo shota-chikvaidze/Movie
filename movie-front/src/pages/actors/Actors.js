@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { Link } from 'react-router-dom'
 import './Actors.css'
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
@@ -16,7 +16,7 @@ export const Actors = () => {
       try{
 
           setLoading(true)
-          const res = await axios.get(`http://localhost:5000/api/actors/get-actors/?page=${page}&limit=20`)
+          const res = await axios.get(`/actors/get-actors/?page=${page}&limit=20`)
           
           setActors(res.data.actors)
           setCurrentPage(res.data.currentPage)

@@ -41,14 +41,7 @@ const Profile = () => {
             const decoded = jwtDecode(token)
             const userId = decoded.id
 
-            const res = await axios.get(`http://localhost:5000/api/comment/get-user-comment/${userId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            console.log('Response:', res.data);
-            console.log('Decoded Token:', decoded);
-            
+            const res = await axios.get(`/comment/get-user-comment/${userId}`)
 
             setUserComment(res.data.userComments)
 
@@ -68,9 +61,7 @@ const Profile = () => {
             const decoded = jwtDecode(token)
             const userId = decoded.id
 
-            const res = await axios.get(`http://localhost:5000/api/rating/get-user-rating/${userId}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
+            const res = await axios.get(`/rating/get-user-rating/${userId}`)
             setUserRating(res.data.ratings)
 
         }catch(err){

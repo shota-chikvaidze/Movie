@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios from '../../api/axios'
 import { jwtDecode } from 'jwt-decode'
 import './ProfileRating.css'
 import { FaStar } from "react-icons/fa";
@@ -22,9 +22,7 @@ const ProfileRating = () => {
     try{
 
       setLoading(true)
-      const res = await axios.get(`http://localhost:5000/api/rating/get-user-rating/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const res = await axios.get(`/rating/get-user-rating/${userId}`)
 
       setUserRatings(res.data.ratings)
       setLoading(false)
@@ -43,11 +41,7 @@ const ProfileRating = () => {
     try{
 
       const token = localStorage.getItem('token')
-      const res = await axios.delete(`http://localhost:5000/api/rating/delete-rating/${ratingId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      const res = await axios.delete(`/rating/delete-rating/${ratingId}`)
 
       setUserRatings((prevRating) => {
         return prevRating.filter((del) => del._id !== ratingId)
