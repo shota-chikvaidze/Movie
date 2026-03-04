@@ -42,3 +42,32 @@
 .star_icon.active {
     color: gold;
 }
+
+@media (max-width: 768px) {
+    .rating_right {
+        gap: 8px;
+    }
+
+    .star_icon_wrapper {
+        gap: 6px;
+    }
+
+    .star_icon {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 480px) {
+    .rating_right {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .star_icon {
+        font-size: 15px;
+    }
+
+    .user_icon {
+        font-size: 18px;
+    }
+}

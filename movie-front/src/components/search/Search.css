@@ -42,3 +42,46 @@
     flex-direction: column;
     gap: 5px;
 }
+
+@media (max-width: 768px) {
+    .search_sectiion {
+        padding: 20px;
+    }
+
+    .search_container {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search_sectiion {
+        padding: 15px;
+    }
+
+    .search_container {
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .search_results {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 320px) {
+    .search_sectiion {
+        padding: 10px;
+    }
+
+    .search_container {
+        gap: 10px;
+    }
+
+    .search_results {
+        font-size: 12px;
+    }
+
+    .no_movies_h4 {
+        font-size: 16px;
+    }
+}

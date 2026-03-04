@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Layout.css'
 import { useAuth } from '../components/authProvider/AuthProvider'
 
 import { IoSearchOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
-import { FaUser } from "react-icons/fa";
+import { FaUser, FaBars, FaTimes } from "react-icons/fa";
 import { RiMovie2Line } from "react-icons/ri";
-import { BsBookmarkPlus } from "react-icons/bs";
 import { FaUserCircle } from "react-icons/fa";
 import { CiStar } from "react-icons/ci";
 import WebLogo from '../assets/images/webLogo.png';
 import { LiaComments } from "react-icons/lia";
 
 const Layout = () => {
-  
+
   const [search, setSearch] = useState('');
   const [popup, setPopup] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate()
   const { user, logoutUser, loading } = useAuth()
 
@@ -27,7 +27,6 @@ const Layout = () => {
     }
   };
 
-
   const handlePopup = () => {
     if(popup === true) {
       setPopup(false)
@@ -36,6 +35,7 @@ const Layout = () => {
     )
   }
 
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header>
@@ -46,11 +46,14 @@ const Layout = () => {
           </Link>
         </div>
 
-        <ul className='navbar_links'>
-          <Link to={'/movies'}> <li className='navbar_link'>Movies</li> </Link>
-          <Link to={'/series'}> <li className='navbar_link'>Series</li> </Link>
-          <Link to={'/actors'}> <li className='navbar_link'>Actors</li> </Link>
-          <Link> <li className='navbar_link'>Anime</li> </Link>
+        <button className='burger_btn' onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+
+        <ul className={`navbar_links${menuOpen ? ' open' : ''}`}>
+          <Link to={'/movies'} onClick={closeMenu}> <li className='navbar_link'>Movies</li> </Link>
+          <Link to={'/series'} onClick={closeMenu}> <li className='navbar_link'>Series</li> </Link>
+          <Link to={'/actors'} onClick={closeMenu}> <li className='navbar_link'>Actors</li> </Link>
         </ul>
       </div>
       <div className='search_user_wrapper'>
@@ -74,7 +77,7 @@ const Layout = () => {
           <>
             <div className='logged_in_user'>
               <FaUser className='user_logo' onClick={handlePopup} />
-              
+
               {popup && (
                 <>
                   <div className='user_popup'>
@@ -110,7 +113,7 @@ const Layout = () => {
                     </ul>
 
                     <button onClick={logoutUser} className='sign_out_btn' >Sign Out</button>
-                    
+
                   </div>
                 </>
               )}
@@ -128,7 +131,7 @@ const Layout = () => {
         )}
 
 
-        
+
       </div>
     </header>
   )

@@ -123,3 +123,67 @@
     font-weight: 300;
     padding: 10px 0;
 }
+
+@media (max-width: 768px) {
+    .slider_3_section {
+        max-width: 100%;
+        padding: 15px 0;
+        height: 450px;
+    }
+
+    .slider_3_series_card {
+        min-width: 180px !important;
+        height: 290px;
+    }
+
+    .slider_3_series_card_details {
+        height: 260px;
+    }
+}
+
+@media (max-width: 480px) {
+    .slider_3_section {
+        height: 380px;
+    }
+
+    .slider_3_series_card {
+        min-width: 150px !important;
+        height: 250px;
+    }
+
+    .slider_3_series_card_details {
+        height: 220px;
+    }
+}
+
+@media (max-width: 320px) {
+    .slider_3_section {
+        height: 300px;
+    }
+
+    .slider_3_series_card {
+        min-width: 100px !important;
+        height: 180px;
+    }
+
+    .slider_3_series_card_details {
+        height: 155px;
+    }
+
+    .series_track {
+        gap: 8px;
+    }
+
+    .slider_title_wrapper h1 {
+        font-size: 11px;
+    }
+
+    .slider_title_wrapper span {
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    .series_slider_btn {
+        font-size: 1.3rem;
+    }
+}

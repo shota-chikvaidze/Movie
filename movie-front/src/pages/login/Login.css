@@ -96,3 +96,41 @@
     font-size: 15px;
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    .login_form {
+        padding: 0 30px;
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .login_form input,
+    .login_form button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .login_form {
+        padding: 0 20px;
+        width: 95%;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .login_form h1 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 320px) {
+    .login_form {
+        padding: 20px 15px;
+        width: 98%;
+    }
+
+    .login_form h1 {
+        font-size: 17px;
+    }
+}
