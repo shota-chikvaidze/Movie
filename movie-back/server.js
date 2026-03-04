@@ -28,6 +28,16 @@ app.use('/api/myList', MyListRoutes)
 app.use('/api/comment', CommentRoutes)
 app.use('/api/rating', RatingRoutes)
 
+app.get('/health', (req, res) => {
+  const healthCheck = {
+    uptime: process.uptime(),
+    status: 'ok',
+    timeStamps: Date.now(),
+    mongodb: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  }
+  res.status(200).json(healthCheck)
+})
+
 const PORT = process.env.PORT || 5000
 
 mongoose.connect(process.env.MONGODB, {
