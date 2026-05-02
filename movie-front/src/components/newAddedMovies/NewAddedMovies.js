@@ -72,7 +72,7 @@ const NewAddedMovies = () => {
                         <div key={index} className='slider_2_movie_card'>
 
                           <div className='slider_2_movie_card_details'>
-                            <img src={newMovie.image.url} alt={newMovie.title} className='movie_img_rating_image'/>
+                            <img src={newMovie.image} alt={newMovie.title} className='movie_img_rating_image'/>
                             <div className='slider_2_movie_context'>
                               <p> {newMovie.year} </p>
                               <p> {newMovie.rating[0]?.source}: {newMovie.rating[0]?.score} </p>

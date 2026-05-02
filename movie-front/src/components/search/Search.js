@@ -55,7 +55,7 @@ const Search = () => {
                               <div key={index} className='movie_card'>
 
                                 <div className='movie_card_details'>
-                                  <img src={movie.image.url} alt={movie.title} className='movie_img_rating_image'/>
+                                  <img src={movie.image} alt={movie.title} className='movie_img_rating_image'/>
                                   <div className='movie_context'>
                                     <p> {movie.year} </p>
                                     <p> {movie.rating[0]?.source}: {movie.rating[0]?.score} </p>

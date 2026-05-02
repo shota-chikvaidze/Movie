@@ -26,7 +26,7 @@ function App() {
   const { user, loading } = useAuth()
 
   if(loading){
-    return <p>Loading...</p>
+    return <p className='loading_style '>Wating for renders cold start...</p>
   }
 
   return (

@@ -65,7 +65,7 @@ export const Home = () => {
                 movies.map((movie, index) => (
                   <div className='slider_movie_item' key={movie._id}>
                     <div className='slider_movie_item slider_image'>
-                      <img src={movie?.image?.url} alt={movie?.title} />
+                      <img src={movie?.image} alt={movie?.title} />
                     </div>
                     <div>
                       <Link to={`/movies/${movie._id}`}>

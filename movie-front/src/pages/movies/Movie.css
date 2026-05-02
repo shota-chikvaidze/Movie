@@ -20,6 +20,7 @@
 
 .movie_card {
     width: 100%;
+    max-width: 250px;
     height: 350px;
     color: #fff;
 }

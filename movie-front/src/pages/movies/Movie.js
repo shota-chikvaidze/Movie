@@ -15,6 +15,7 @@ export const Movie = () => {
   const [ rating, setRating ] = useState('')
   const [ loading, setLoading ] = useState(true)
 
+
   const fetchMovies = async (pageNumber = 1) => {
     try{
       
@@ -98,7 +99,7 @@ export const Movie = () => {
           </div>
     
           <div className='filter_search_button'>
-            <button onClick={() => { setPage(1); fetchMovies(1);}}>Search</button>
+            <button onClick={() => setPage(1)}>Search</button>
           </div>
     
         </div>
@@ -114,11 +115,11 @@ export const Movie = () => {
           ) : (
             <>
               { movies.map((movies, index) => (
-                <Link to={`/movies/${movies._id}`} >
-                  <div key={index} className='movie_card'>
+                <Link to={`/movies/${movies._id}`} key={movies._id} >
+                  <div  className='movie_card'>
                 
                     <div className='movie_card_details'>
-                      <img src={movies.image.url} alt={movies.title} className='movie_img_rating_image'/>
+                      <img src={movies.image} alt={movies.title} className='movie_img_rating_image'/>
                       <div className='movie_context'>
                         <p> {movies.year} </p>
                         <p> {movies.rating[0]?.source}: {movies.rating[0]?.score} </p>
@@ -136,16 +137,12 @@ export const Movie = () => {
         
         </div>
         
-        {movies.length === 0 ? (
-          <>
-          
-          </>
-        ) : (
+        {movies.length !== 0 &&  (
           <>
             <div className="pagination_controls">
-              <button onClick={() => setPage(page - 1)} disabled={page >= 0} > <MdOutlineNavigateBefore /> </button>
+              <button onClick={() => { setPage(page - 1); window.scrollTo({ top: 0, behavior: 'instant' }) }} disabled={page === 1 || loading} > <MdOutlineNavigateBefore /> </button>
               <span>Page {page} of {totalPages}</span>
-              <button onClick={() => setPage(page + 1)} disabled={page >= totalPages} > <MdOutlineNavigateNext /> </button>
+              <button onClick={() => { setPage(page + 1); window.scrollTo({ top: 0, behavior: 'instant' }) }} disabled={page >= totalPages || loading} > <MdOutlineNavigateNext /> </button>
             </div>
           </>
         )}

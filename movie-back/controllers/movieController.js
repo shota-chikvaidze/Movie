@@ -69,49 +69,55 @@ exports.getMoviesId = async (req, res) => {
 }
 
 exports.createMovies = async (req, res) => {
-    const { title, description, image, year, director, genre, videoPath, starring, rating, type, isFeatured } = req.body;
+    const movies = req.body;
 
     try {
-        if (
-            !title ||
-            !description ||
-            !image ||
-            !director ||
-            !year ||
-            !genre ||
-            !videoPath ||
-            !type ||
-            !isFeatured ||
-            !Array.isArray(starring) || starring.length === 0 ||
-            !starring[0].actor ||
-            !starring[0].role ||
-            !Array.isArray(rating) || rating.length === 0 ||
-            !rating[0].source ||
-            !rating[0].score ||
-            !rating[0].date
-        ) {
-            return res.status(400).json({ message: 'All fields required' });
+        if (!Array.isArray(movies) || movies.length === 0) {
+            return res.status(400).json({ message: 'Movies array is required' });
         }
 
-        const newMovie = new Movie({
-            title,
-            description,
-            image,
-            year,
-            director,
-            genre,
-            videoPath,
-            starring,
-            rating,
-            type,
-            isFeatured
+        for (const movie of movies) {
+            const {
+                title, description, image, year,
+                director, genre, videoPath,
+                starring, rating, type, isFeatured
+            } = movie;
+
+            if (
+                !title || !description || !image || !director ||
+                !year || !genre || !videoPath || !type ||
+                typeof isFeatured !== 'boolean' ||
+                !Array.isArray(starring) || starring.length === 0 ||
+                !Array.isArray(rating) || rating.length === 0
+            ) {
+                return res.status(400).json({ message: `Invalid movie: ${title || 'unknown'}` });
+            }
+
+            for (const actor of starring) {
+                if (!actor.actor || !actor.role) {
+                    return res.status(400).json({ message: `Invalid starring in ${title}` });
+                }
+            }
+
+            for (const r of rating) {
+                if (!r.source || !r.score || !r.date) {
+                    return res.status(400).json({ message: `Invalid rating in ${title}` });
+                }
+            }
+        }
+
+        const createdMovies = await Movie.insertMany(movies);
+
+        res.status(201).json({
+            message: 'Movies created successfully',
+            movies: createdMovies
         });
 
-        await newMovie.save();
-
-        res.status(201).json({ message: 'movie created successfully', movie: newMovie });
     } catch (err) {
-        res.status(500).json({ message: 'error creating movie', error: err.message });
+        res.status(500).json({
+            message: 'Error creating movies',
+            error: err.message
+        });
     }
 };
 

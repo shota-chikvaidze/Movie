@@ -158,7 +158,7 @@ const MovieDetails = () => {
             <div className='movie_details_container'>
                 <div className='movie_video_wrapper'>
                     
-                    <img src={movieDetails.image?.url} alt={movieDetails.title} />
+                    <img src={movieDetails.image} alt={movieDetails.title} />
                     <div className="movie_video">
                       <iframe
                         src={movieDetails.videoPath}

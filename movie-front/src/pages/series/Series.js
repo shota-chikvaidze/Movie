@@ -41,7 +41,7 @@ export const Series = () => {
 
           ) : (
             series.map((series, index) => (
-              <div key={index} className='series_card'>
+              <div key={series._id} className='series_card'>
 
                 <div className='series_card_details'>
                   <img src={series.image.url} alt={series.title} />
